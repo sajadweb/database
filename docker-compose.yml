@@ -1,5 +1,32 @@
-version: '3'
+version: '3.5'
+
 services:
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    env_file:
+    - docker.env
+    volumes:
+      - db_post:/var/lib/postgresql/data:rw
+    ports:
+      - "5432:5432"
+    networks:
+      - sajadweb
+    restart: unless-stopped
+  
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    env_file:
+      - docker.env
+    volumes:
+      - db_pgadmin:/root/.pgadmin:rw
+    ports:
+      - "5050:80"
+    networks:
+      - sajadweb
+    restart: unless-stopped
+
   db:
     image: mysql:5.7
     container_name: mysqldev
@@ -27,20 +54,7 @@ services:
     restart: always
     volumes:
       - db_mongo:/data/db:rw
-  postgres:
-    image: postgres:12-alpine
-    restart: always
-    container_name: postgres
-    ports:
-      - "5432:5432"
-    networks:
-        - sajadweb
-    expose:
-      - 5432
-    env_file:
-    - docker.env
-    volumes:
-      - db_post:/var/lib/postgresql/data:rw
+
   #Redis Service
   redis:
     image: redis:6-alpine
@@ -61,21 +75,6 @@ services:
       - 90:8080
     expose:
       - 90
-    networks:
-        - sajadweb
-  pgadmin:
-    links:
-    - postgres:postgres
-    container_name: pgadmin
-    image: dpage/pgadmin4
-    ports:
-    - "110:80"
-    expose:
-      - 110
-    volumes:
-    - db_pgadmin:/root/.pgadmin:rw
-    env_file:
-    - docker.env
     networks:
         - sajadweb
 
