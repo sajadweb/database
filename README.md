@@ -1,5 +1,27 @@
 # database
 Docker all databases 
+1. MySQL
+2. MongoDB
+3. Postgres
+4. Redis
+## Tooles
+1. phpmyadmin
+2. adminer
+3. pgadmin
+## Portes
+ 1. 5432
+ 2. 5050
+ 3. 3306
+ 4. 27018
+ 5. 6379
+ 6. 90
+ 7. 60
+## networks
+```docker
+networks:
+  sajadweb:
+    external: true
+```
 ## Init
 ```bash
 _>npm run up
