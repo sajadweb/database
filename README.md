@@ -12,7 +12,7 @@ Docker all databases
  1. 5432
  2. 5050
  3. 3306
- 4. 27018
+ 4. 27017
  5. 6379
  6. 90
  7. 60
@@ -64,3 +64,6 @@ _>npm run restart
 ```bash
 _>docker-compose restart
 ```
+
+## Author
+Sajjad Mohhamadi Nejad <sajadweb7@gmail.com>

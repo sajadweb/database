@@ -46,11 +46,11 @@ services:
     container_name: mongodev
     image: mongo
     ports:
-      - "27018:27017"
+      - "27017:27017"
     networks:
         - sajadweb
     expose:
-      - 27018
+      - 27017
     restart: always
     volumes:
       - db_mongo:/data/db:rw
