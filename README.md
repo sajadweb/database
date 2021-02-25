@@ -66,4 +66,4 @@ _>docker-compose restart
 ```
 
 ## Author
-Sajjad Mohhamadi Nejad <sajadweb7@gmail.com>
+Sajjad Mohammadi Nejad <sajadweb7@gmail.com>
