@@ -4,10 +4,12 @@ Docker all databases
 2. MongoDB
 3. Postgres
 4. Redis
+5. ElasticSearch
 ## Tooles
 1. phpmyadmin
 2. adminer
 3. pgadmin
+4. kibana
 ## Portes
  1. 5432
  2. 5050
@@ -16,6 +18,8 @@ Docker all databases
  5. 6379
  6. 90
  7. 60
+ 8. 5601
+ 9. 9200
 ## networks
 ```docker
 networks:
@@ -66,4 +70,4 @@ _>docker-compose restart
 ```
 
 ## Author
-Sajjad Mohhamadi Nejad <sajadweb7@gmail.com>
+Sajjad Mohhamadi Nejad <sajadweb7@gmail.com , daram3118@gmail.com>

@@ -1,11 +1,41 @@
 version: '3.5'
 
 services:
+  # Elasticsearch Docker Images: https://www.docker.elastic.co/
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.12.0
+    container_name: elasticsearch
+    env_file:
+     - docker.env
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    cap_add:
+      - IPC_LOCK
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:7.12.0
+    env_file:
+     - docker.env
+    ports:
+      - 5601:5601
+    depends_on:
+      - elasticsearch
+  #Postgres
   postgres:
     container_name: postgres_container
     image: postgres
     env_file:
-    - docker.env
+     - docker.env
     volumes:
       - db_post:/var/lib/postgresql/data:rw
     ports:
@@ -94,6 +124,8 @@ networks:
     external: true
 
 volumes:
+  elasticsearch-data:
+    driver: local
   db_mysql: {}
   db_mongo: {}
   db_post: {}
