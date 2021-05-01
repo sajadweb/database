@@ -15,7 +15,7 @@ services:
   
   pgadmin:
     container_name: pgadmin_container
-    image: dpage/pgadmin5
+    image: dpage/pgadmin4
     env_file:
       - docker.env
     volumes:
