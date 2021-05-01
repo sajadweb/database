@@ -36,17 +36,6 @@ services:
         - db_redis:/data:rw
     networks:
         - sajadweb
-  adminer:
-    image: adminer
-    container_name: adminer
-    restart: always
-    ports:
-      - 90:8080
-    expose:
-      - 90
-    networks:
-        - sajadweb
- 
 networks:
   sajadweb:
     external: true
