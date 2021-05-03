@@ -1,25 +1,8 @@
 # database
 Docker all databases 
-1. MySQL
-2. MongoDB
-3. Postgres
-4. Redis
-5. ElasticSearch
-## Tooles
-1. phpmyadmin
-2. adminer
-3. pgadmin
-4. kibana
+1.Redis
 ## Portes
- 1. 5432
- 2. 5050
- 3. 3306
- 4. 27017
- 5. 6379
- 6. 90
- 7. 60
- 8. 5601
- 9. 9200
+ 1.27017
 ## networks
 ```docker
 networks:
