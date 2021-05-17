@@ -7,6 +7,9 @@ services:
     ports:
       - "6379:6379"
     container_name: redis
+    restart: always
+    environment:
+      - REDIS_REPLICATION_MODE=master
     volumes:
       - db_redis:/data:rw
     networks:
