@@ -4,8 +4,8 @@ services:
    
  
   #Postgres
-  postgres:
-    container_name: postgres_container
+  db:
+    container_name: db
     image: postgres
     env_file:
      - docker.env
