@@ -1,22 +1,20 @@
-version: '3.5'
+version: "3.5"
 
 services:
-   
- 
   #Postgres
   db:
     container_name: db
     image: postgres
     env_file:
-     - docker.env
+      - docker.env
     volumes:
       - db_post:/var/lib/postgresql/data:rw
     ports:
       - "5432:5432"
     networks:
       - sajadweb
-    restart: unless-stopped
-  
+    restart: always
+
   pgadmin:
     container_name: pgadmin_container
     image: dpage/pgadmin4
@@ -28,12 +26,14 @@ services:
       - "5050:80"
     networks:
       - sajadweb
-    restart: unless-stopped
- 
+    restart: always
+    links:
+      - "db:pgsql-server"
+
 networks:
   sajadweb:
     external: true
 
 volumes:
-  db_post: {} 
+  db_post: {}
   db_pgadmin: {}
