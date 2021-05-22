@@ -3,6 +3,7 @@ services:
   db:
     image: postgres:12.2
     restart: always
+    container_name: db
     environment:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
@@ -27,19 +28,11 @@ services:
     links:
     - "db:pgsql-server"
 
- 
-  #Redis Service
-  redis:
-    image: "redis:alpine"
-    ports:
-      - "6379:6379"
-    container_name: redis
-    volumes:
-        - db_redis:/data:rw
-
 volumes:
-  db_post: {}
-  db_redis: {}
-  db_pgadmin: {}
   db-data:
   pgadmin-data:
+
+networks:
+    default:
+      external:
+        name: sajadweb
