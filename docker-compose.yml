@@ -29,8 +29,8 @@ services:
     - "db:pgsql-server"
 
 volumes:
-  db-data:
-  pgadmin-data:
+  db-data: {}
+  pgadmin-data: {}
 
 networks:
     default:
