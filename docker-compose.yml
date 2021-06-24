@@ -8,12 +8,12 @@ services:
     env_file:
       .pg.env
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - db-test-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
 
 volumes:
-  db-data:
+  db-test-data:
 
 networks:
     default:
