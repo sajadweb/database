@@ -12,5 +12,8 @@
   },
   "keywords": [],
   "author": "Sajjad Mohhamadi Nejad<sajadweb7@gmail.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "mssql": "^7.2.1"
+  }
 }

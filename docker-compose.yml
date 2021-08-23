@@ -1,21 +1,14 @@
-version: '3.2'
+version: '3.7'
 services:
-  db:
-    image: postgres
-    restart: always
-    tty: true
-    container_name: db
-    env_file:
-      .pg.env
-    volumes:
-      - db-test-data:/var/lib/postgresql/data
+  sql-server-db:
+    container_name: sql-server-db
+    image: mcr.microsoft.com/mssql/server:2019-latest
     ports:
-      - "5432:5432"
-
-volumes:
-  db-test-data:
-
+      - "1433:1433"
+    env_file:
+      .mssql.env
 networks:
     default:
       external:
         name: sajadweb
+
