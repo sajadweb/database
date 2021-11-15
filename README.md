@@ -4,6 +4,17 @@ Docker  Mssql(SQL SERVER)
 https://blog.logrocket.com/docker-sql-server/
 ## Portes
  1. 1433
+
+## config
+```bash
+ $ docker exec -it sql-server-db /bin/bash
+ $ /opt/mssql-tools/bin/sqlcmd -U sa -P super_duper_password
+ $ select name from sys.Databases;
+ $ go
+ $ create database testdb;
+ $ go
+
+```
 ## networks
 ```docker
 networks:

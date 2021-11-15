@@ -2,11 +2,14 @@ version: '3.7'
 services:
   sql-server-db:
     container_name: sql-server-db
-    image: mcr.microsoft.com/mssql/server:2019-latest
+    image: mcr.microsoft.com/mssql/server
+    restart: always
     ports:
       - "1433:1433"
     env_file:
       .mssql.env
+    volumes:
+        - './drive:/var/opt/mssql'
 networks:
     default:
       external:

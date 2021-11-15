@@ -4,7 +4,7 @@ const config = {
     server: "localhost",
     user: 'SA', 
     password: 'super_duper_password',
-    database: "testdb",
+    database: "tempdb",
     options: {
         trustedConnection: true,
         encrypt: true,
