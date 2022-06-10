@@ -8,7 +8,7 @@
     "restart": "docker-compose restart",
     "stop": "docker-compose stop",
     "up": "docker-compose build && docker-compose up -d",
-    "down": "docker-compose down"
+    "down": "docker-compose down --volumes"
   },
   "keywords": [],
   "author": "Sajjad Mohhamadi Nejad<sajadweb7@gmail.com>",

@@ -1,133 +1,28 @@
 version: '3.5'
 
 services:
-  # Elasticsearch Docker Images: https://www.docker.elastic.co/
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.12.0
-    container_name: elasticsearch
-    env_file:
-     - docker.env
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-      nofile:
-        soft: 65536
-        hard: 65536
-    cap_add:
-      - IPC_LOCK
-    volumes:
-      - elasticsearch-data:/usr/share/elasticsearch/data
-    ports:
-      - 9200:9200
 
-  kibana:
-    container_name: kibana
-    image: docker.elastic.co/kibana/kibana:7.12.0
-    env_file:
-     - docker.env
+  rabbitmq:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: 'rabbitmq'
     ports:
-      - 5601:5601
-    depends_on:
-      - elasticsearch
-  #Postgres
-  postgres:
-    container_name: postgres_container
-    image: postgres
-    env_file:
-     - docker.env
+        - 5672:5672
+        - 15672:15672
     volumes:
-      - db_post:/var/lib/postgresql/data:rw
-    ports:
-      - "5432:5432"
-    networks:
-      - sajadweb
-    restart: unless-stopped
-  
-  pgadmin:
-    container_name: pgadmin_container
-    image: dpage/pgadmin4
-    env_file:
-      - docker.env
-    volumes:
-      - db_pgadmin:/root/.pgadmin:rw
-    ports:
-      - "5050:80"
-    networks:
-      - sajadweb
-    restart: unless-stopped
-
-  db:
-    image: mysql:5.7
-    container_name: mysqldev
-    volumes:
-      - db_mysql:/var/lib/mysql:rw
-    restart: always
-    expose:
-      - 3306
-    ports:
-      - 3306:3306
-    networks:
-        - sajadweb
-    env_file:
-    - docker.env
-
-  mongodev:
-    container_name: mongodev
-    image: mongo
-    ports:
-      - "27017:27017"
-    networks:
-        - sajadweb
-    expose:
-      - 27017
-    restart: always
-    volumes:
-      - db_mongo:/data/db:rw
-
-  #Redis Service
-  redis:
-    image: "redis:alpine"
-    ports:
-      - "6379:6379"
-    container_name: redis
-    volumes:
-        - db_redis:/data:rw
-    networks:
-        - sajadweb
-  adminer:
-    image: adminer
-    container_name: adminer
-    restart: always
-    ports:
-      - 90:8080
-    expose:
-      - 90
-    networks:
-        - sajadweb
-  # phpmyadmin
-  phpmyadmin:
-    container_name: phpmyadmin
-    depends_on:
-      - db
-    image: phpmyadmin/phpmyadmin
-    restart: always
-    ports:
-      - '60:80'
+        - rabbitmq-data:/var/lib/rabbitmq/
+        - rabbitmq-log:/var/log/rabbitmq
     environment:
-      PMA_HOST: db
-      MYSQL_ROOT_PASSWORD: 1234
+      - .docker.env
     networks:
-      - sajadweb
+        - sajadweb
 networks:
   sajadweb:
     external: true
 
 volumes:
-  elasticsearch-data:
+  rabbitmq-data:
     driver: local
-  db_mysql: {}
-  db_mongo: {}
-  db_post: {}
-  db_redis: {}
-  db_pgadmin: {}
+  rabbitmq-log:
+    driver: local
