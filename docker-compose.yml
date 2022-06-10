@@ -13,8 +13,8 @@ services:
     volumes:
         - rabbitmq-data:/var/lib/rabbitmq/
         - rabbitmq-log:/var/log/rabbitmq
-    environment:
-      - .docker.env
+    env_file:
+      .docker.env
     networks:
         - sajadweb
 networks:
