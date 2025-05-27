@@ -71,3 +71,87 @@ _>docker-compose restart
 
 ## Author
 Sajjad Mohhamadi Nejad <sajadweb7@gmail.com , daram3118@gmail.com>
+
+
+To **set a password in MongoDB**, you need to create an **admin user** with a username and password inside the `admin` database.
+
+Here’s a simple step-by-step guide:
+
+---
+
+## ✅ Step-by-Step: Set a MongoDB Password for Admin User
+
+### 🟢 Step 1: Start the MongoDB shell
+
+```bash
+mongosh
+```
+
+### 🟢 Step 2: Switch to the `admin` database
+
+```js
+use admin
+```
+
+### 🟢 Step 3: Create the admin user
+
+Replace `myAdminUser` and `myStrongPassword` with your desired username and password:
+
+```js
+db.createUser({
+  user: "myAdminUser",
+  pwd: "myStrongPassword",
+  roles: [ { role: "userAdminAnyDatabase", db: "admin" }, "readWriteAnyDatabase" ]
+})
+```
+
+You should see:
+
+```bash
+Successfully added user: { "user" : "myAdminUser", ... }
+```
+
+---
+
+## 🔒 Step 4: Enable authentication in MongoDB config file
+
+Edit the MongoDB config file:
+
+```bash
+sudo nano /etc/mongod.conf
+```
+
+Find the `security:` section (add it if it doesn’t exist), and enable authorization:
+
+```yaml
+security:
+  authorization: enabled
+```
+
+Save and exit (Ctrl+O, Enter, Ctrl+X).
+
+---
+
+## 🔁 Step 5: Restart MongoDB
+
+```bash
+sudo systemctl restart mongod
+```
+
+---
+
+## 🔐 Step 6: Log in with the password
+
+From now on, you need to authenticate:
+
+```bash
+mongosh -u "myAdminUser" -p "myStrongPassword" --authenticationDatabase "admin"
+```
+
+---
+
+Let me know if you want to:
+
+* Add users to a specific database (not admin)
+* Change password later
+* Set roles for read-only, etc.
