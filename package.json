@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "docker exec -it mongodev mongo -u admin -p strong-SecretPa$$w0rd --authenticationDatabase admin",
     "start": "docker-compose start",
     "restart": "docker-compose restart",
     "stop": "docker-compose stop",

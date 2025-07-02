@@ -80,7 +80,11 @@ Here’s a simple step-by-step guide:
 ---
 
 ## ✅ Step-by-Step: Set a MongoDB Password for Admin User
+### 🟢 Step 1: got to shel
 
+```bash
+docker-compose exec mongodev shell
+```
 ### 🟢 Step 1: Start the MongoDB shell
 
 ```bash
@@ -99,10 +103,10 @@ Replace `myAdminUser` and `myStrongPassword` with your desired username and pass
 
 ```js
 db.createUser({
-  user: "myAdminUser",
-  pwd: "myStrongPassword",
+  user: "admin",
+  pwd: "sajadweb1368",
   roles: [ { role: "userAdminAnyDatabase", db: "admin" }, "readWriteAnyDatabase" ]
-})
+});
 ```
 
 You should see:
@@ -145,13 +149,19 @@ sudo systemctl restart mongod
 From now on, you need to authenticate:
 
 ```bash
-mongosh -u "myAdminUser" -p "myStrongPassword" --authenticationDatabase "admin"
+mongosh -u "admin" -p "sajadweb1368" --authenticationDatabase "admin"
 ```
 
 ---
 
-Let me know if you want to:
+## v2
+```sh
+openssl rand -base64 756 > mongo-keyfile
+chmod 400 mongo-keyfile
 
-* Add users to a specific database (not admin)
-* Change password later
-* Set roles for read-only, etc.
+docker-compose down -v   # برای حذف volumeها و دیتابیس قدیمی
+./prepare-init.sh         # تولید فایل mongo-init.js از template
+docker-compose up -d
+
+
+```
