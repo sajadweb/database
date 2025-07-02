@@ -22,7 +22,7 @@ services:
         chmod 600 /mongodb-keyfile
         chown mongodb:mongodb /mongodb-keyfile
       fi;
-      exec mongod --config /etc/mongo.conf --keyFile /mongodb-keyfile --bind_ip_all
+      exec mongod --config /etc/mongo/mongo.conf --keyFile /mongodb-keyfile --bind_ip_all
       "
     networks:
       - sajadweb
