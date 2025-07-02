@@ -7,16 +7,19 @@ services:
     restart: always
     ports:
       - "127.0.0.1:27017:27017"
+    expose:
+      - 27017
     env_file:
       - docker.env
     volumes:
       - db_mongo:/data/db:rw
-    #   - ./init/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
-    #   - ./config/mongo.conf:/etc/mongo.conf:ro
-    #   - ./mongo-keyfile:/etc/mongodb-keyfile:ro
-    # command: ["mongod", "--config", "/etc/mongo.conf", "--keyFile", "/etc/mongodb-keyfile"]
+      - ./init/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ./config/mongo.conf:/etc/mongo/mongo.conf:ro
+      - ./mongo-keyfile:/etc/mongo/mongo-keyfile:ro
+    command: ["mongod", "--config", "/etc/mongo/mongo.conf"]
     networks:
       - sajadweb
+
 
 networks:
   sajadweb:
