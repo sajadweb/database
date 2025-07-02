@@ -15,8 +15,16 @@ services:
       - db_mongo:/data/db:rw
       - ./init/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
       - ./config/mongo.conf:/etc/mongo/mongo.conf:ro
-      - ./mongo-keyfile:/etc/mongo/mongo-keyfile:ro
-    command: ["mongod", "--config", "/etc/mongo/mongo.conf"]
+      # - ./mongo-keyfile:/etc/mongo/mongo-keyfile:ro
+    command:  >
+      bash -c "
+      if [ ! -f /mongodb-keyfile ]; then
+        openssl rand -base64 756 > /mongodb-keyfile
+        chmod 600 /mongodb-keyfile
+        chown mongodb:mongodb /mongodb-keyfile
+      fi
+      exec mongod --config /etc/mongo.conf --keyFile /mongodb-keyfile --bind_ip_all
+      "
     networks:
       - sajadweb
 
